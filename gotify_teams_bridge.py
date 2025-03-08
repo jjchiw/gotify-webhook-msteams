@@ -32,7 +32,7 @@ if not GOTIFY_WS_URL:
 GOTIFY_WS_URL = f"{GOTIFY_WS_URL}?token={GOTIFY_TOKEN}"
 
 
-def on_message_fetch_with_backoff(message, max_retries=5):
+def on_message_post_with_backoff(message, max_retries=5):
     retry_delay = 1  # Initial delay in seconds
     for attempt in range(max_retries):
         try:
@@ -56,7 +56,7 @@ def on_message_fetch_with_backoff(message, max_retries=5):
 
 def on_message(ws, message):
     logger.info(f"on_message {message}")
-    on_message_fetch_with_backoff(message)
+    on_message_post_with_backoff(message)
 
 
 def on_error(ws, error):
